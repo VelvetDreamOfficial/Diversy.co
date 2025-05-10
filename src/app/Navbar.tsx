@@ -1,6 +1,7 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faBars } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function Navbar() {
     return (
@@ -20,15 +21,15 @@ export default function Navbar() {
                 paddingInline: "3%",
             }}
         >
-            <a href="/" style={{ marginBlock: "auto" }}>
+            <Link href="/" style={{ marginBlock: "auto" }}>
                 <FontAwesomeIcon
                     icon={faHouse}
                     color="#fbfbfb"
                     size="2x"
                 ></FontAwesomeIcon>
-            </a>
+            </Link>
 
-            <a
+            <Link
                 href="#"
                 style={{ marginBlock: "auto" }}
                 onClick={(e) => {
@@ -40,7 +41,7 @@ export default function Navbar() {
                     color="#fbfbfb"
                     size="2x"
                 ></FontAwesomeIcon>
-            </a>
+            </Link>
         </nav>
     );
 }

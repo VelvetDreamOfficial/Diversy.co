@@ -50,7 +50,6 @@ const Subtitle = styled.h2`
     transform: translate(10px, -40px);
 `;
 
-// a
 const FloatingBox = styled.div`
     position: absolute;
     display: flex;
