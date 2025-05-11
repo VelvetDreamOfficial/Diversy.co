@@ -14,7 +14,15 @@ const markoOne = Marko_One({
 });
 
 // Main component
-export default function Query({ isPortrait }: { isPortrait: boolean }) {
+export default function Query({
+    isPortrait,
+    width,
+    height,
+}: {
+    isPortrait: boolean;
+    width?: number;
+    height?: number;
+}) {
     const router = useRouter();
     const query = router.query.query as string;
 
@@ -26,7 +34,7 @@ export default function Query({ isPortrait }: { isPortrait: boolean }) {
         padding-top: 60px;
     `;
 
-    const Main = LayoutBackground();
+    const Main = LayoutBackground({ isPortrait, width, height });
 
     return (
         <Main>
