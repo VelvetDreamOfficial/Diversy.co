@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "../app/global.css";
 import type { AppProps } from "next/app";
+import LayoutBackground from "../components/LayoutBackground";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     const [screenWidth, setScreenWidth] = useState(0);
@@ -32,12 +35,24 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         };
     });
 
+    const Main = LayoutBackground({
+        isPortrait,
+        width: screenWidth,
+        height: screenHeight,
+    });
+
     return (
-        <Component
-            {...pageProps}
-            isPortrait={isPortrait}
-            height={screenHeight}
-            width={screenWidth}
-        />
+        <main>
+            <Navbar isPortrait></Navbar>
+            <Main>
+                <Component
+                    {...pageProps}
+                    isPortrait={isPortrait}
+                    height={screenHeight}
+                    width={screenWidth}
+                />
+            </Main>
+            <Footer isPortrait />
+        </main>
     );
 }

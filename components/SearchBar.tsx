@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 const Search = styled.input`
     width: 90%;
     height: 40px;
@@ -14,7 +13,7 @@ const Search = styled.input`
     background-color: #0f0f0f;
 `;
 
-export default function SearchBar(props: { isPortrait: boolean }) {
+export default function SearchBar({ isPortrait }: { isPortrait: boolean }) {
     const [results, setResults] = useState<
         { url: string; title: string; id: number }[]
     >([]);
@@ -28,7 +27,7 @@ export default function SearchBar(props: { isPortrait: boolean }) {
         position: absolute;
         display: flex;
         flex-direction: column;
-        width: ${props.isPortrait ? "100%" : "300px"};
+        width: ${isPortrait ? "100%" : "300px"};
         border-radius: 10px;
         border: none;
         padding-left: 20px;

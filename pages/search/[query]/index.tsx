@@ -1,11 +1,8 @@
 "use client";
 
-import Navbar from "../../../components/Navbar";
 import styled from "styled-components";
 import { Marko_One } from "next/font/google";
-import Footer from "../../../components/Footer";
 import { useRouter } from "next/router";
-import LayoutBackground from "../../../components/LayoutBackground";
 
 // Define fonts
 const markoOne = Marko_One({
@@ -14,15 +11,7 @@ const markoOne = Marko_One({
 });
 
 // Main component
-export default function Query({
-    isPortrait,
-    width,
-    height,
-}: {
-    isPortrait: boolean;
-    width?: number;
-    height?: number;
-}) {
+export default function Query() {
     const router = useRouter();
     const query = router.query.query as string;
 
@@ -34,14 +23,5 @@ export default function Query({
         padding-top: 60px;
     `;
 
-    const Main = LayoutBackground({ isPortrait, width, height });
-
-    return (
-        <Main>
-            <Navbar />
-            <TitleText>{query}</TitleText>
-
-            <Footer isPortrait={isPortrait} />
-        </Main>
-    );
+    return <TitleText>{query}</TitleText>;
 }

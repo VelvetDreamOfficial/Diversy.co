@@ -12,51 +12,52 @@ const aldrich = Aldrich({
     subsets: ["latin"],
 });
 
-const NavBarContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
-    padding-block: calc(100px / 10);
-    padding-inline: 3%;
-`;
+export default function Navbar({ isPortrait }: { isPortrait: boolean }) {
+    const NavBarContainer = styled.div`
+        display: flex;
+        justify-content: space-between;
+        height: 60px;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
+        padding-block: calc(100px / 10);
+        padding-inline: 3%;
+    `;
 
-const MenuContainer = styled.div`
-    position: absolute;
-    top: 60px;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
-`;
+    const MenuContainer = styled.div`
+        position: absolute;
+        top: 60px;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5%;
+    `;
 
-const LinkStyled = styled.div`
-    text-decoration: none;
-    color: #fbfbfb;
-    font-size: 4.5rem;
+    const InlineBox = styled.div`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    `;
 
-    :hover {
-        text-decoration: underline;
-    }
-
-    text-align: center;
-`;
-
-const InlineBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-`;
-
-export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const LinkStyled = styled.div`
+        text-decoration: none;
+        color: #fbfbfb;
+        font-size: ${isPortrait ? "2rem" : "4.5rem"};
+
+        :hover {
+            text-decoration: underline;
+        }
+
+        text-align: center;
+    `;
 
     function openOrCloseMenu(e: React.MouseEvent) {
         e.preventDefault();
@@ -66,6 +67,10 @@ export default function Navbar() {
         } else {
             setIsOpen(true);
         }
+    }
+
+    function closeMenu() {
+        setIsOpen(false);
     }
 
     return (
@@ -97,13 +102,31 @@ export default function Navbar() {
             {isOpen && (
                 <MenuContainer>
                     <LinkStyled>
-                        <Link href="/about" className={aldrich.className}>
+                        <Link
+                            href="/about"
+                            className={aldrich.className}
+                            onClick={closeMenu}
+                        >
                             About
                         </Link>
                     </LinkStyled>
                     <LinkStyled>
-                        <Link href="/contact" className={aldrich.className}>
+                        <Link
+                            href="/contact"
+                            className={aldrich.className}
+                            onClick={closeMenu}
+                        >
                             Contact Us
+                        </Link>
+                    </LinkStyled>
+
+                    <LinkStyled>
+                        <Link
+                            href="/login"
+                            className={aldrich.className}
+                            onClick={closeMenu}
+                        >
+                            Login
                         </Link>
                     </LinkStyled>
                 </MenuContainer>

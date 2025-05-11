@@ -1,10 +1,7 @@
 "use client";
 
-import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { Marko_One, Markazi_Text, Aldrich } from "next/font/google";
-import Footer from "../components/Footer";
-import LayoutBackground from "../components/LayoutBackground";
 
 // Define fonts
 const markoOne = Marko_One({
@@ -22,15 +19,7 @@ const aldrich = Aldrich({
 });
 
 // Main component
-export default function Home({
-    isPortrait,
-    width,
-    height,
-}: {
-    isPortrait: boolean;
-    width?: number;
-    height?: number;
-}) {
+export default function Home({ isPortrait }: { isPortrait: boolean }) {
     // Define styles
 
     const TitleBox = styled.div`
@@ -85,35 +74,26 @@ export default function Home({
         font-size: ${isPortrait ? "2vh" : "0.8vw"};
     `;
 
-    const Main = LayoutBackground({ isPortrait, width, height });
-
     return (
-        <Main>
-            <Navbar />
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: isPortrait ? "column" : "row",
-                }}
-            >
-                <TitleBox>
-                    <MainTitle className={markoOne.className}>
-                        Diversy
-                    </MainTitle>
-                    <Subtitle className={markaziText.className}>
-                        The world through <u>diversity</u>
-                    </Subtitle>
-                </TitleBox>
-                <FloatingBox>
-                    <FloatingImage src="/img.png" />
-                    <WIPBox className={aldrich.className}>
-                        <WIPTitle>Page under construction</WIPTitle>
-                        <WIPSubTitle>Come back later</WIPSubTitle>
-                    </WIPBox>
-                </FloatingBox>
-            </div>
-
-            <Footer isPortrait={isPortrait} />
-        </Main>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: isPortrait ? "column" : "row",
+            }}
+        >
+            <TitleBox>
+                <MainTitle className={markoOne.className}>Diversy</MainTitle>
+                <Subtitle className={markaziText.className}>
+                    The world through <u>diversity</u>
+                </Subtitle>
+            </TitleBox>
+            <FloatingBox>
+                <FloatingImage src="/img.png" />
+                <WIPBox className={aldrich.className}>
+                    <WIPTitle>Page under construction</WIPTitle>
+                    <WIPSubTitle>Come back later</WIPSubTitle>
+                </WIPBox>
+            </FloatingBox>
+        </div>
     );
 }
