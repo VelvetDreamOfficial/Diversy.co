@@ -9,6 +9,11 @@
     --foreground: #0f0f0f;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -23,13 +28,15 @@
     }
 } */
 
-body {
+body,
+html {
     background: var(--background);
     color: var(--foreground);
 }
 
 body,
-html {
+html,
+#__next {
     height: 100vh;
     width: 100vw;
     overflow: hidden;

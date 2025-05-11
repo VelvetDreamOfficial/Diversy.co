@@ -15,12 +15,10 @@ const aldrich = Aldrich({
 const NavBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    height: 100px;
+    height: 60px;
     width: 100vw;
     position: absolute;
     top: 0;
-    margin: 0;
-    padding: 0;
     background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
     padding-block: calc(100px / 10);
     padding-inline: 3%;
@@ -28,7 +26,7 @@ const NavBarContainer = styled.div`
 
 const MenuContainer = styled.div`
     position: absolute;
-    top: 100px;
+    top: 60px;
     width: 100vw;
     height: 100vh;
     background: linear-gradient(-85deg, #f3a6a6 0%, #c9ba47 100%);
@@ -47,8 +45,7 @@ const LinkStyled = styled.div`
         text-decoration: underline;
     }
 
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
 `;
 
 const InlineBox = styled.div`

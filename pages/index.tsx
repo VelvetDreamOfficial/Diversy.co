@@ -23,47 +23,25 @@ const aldrich = Aldrich({
 });
 
 // Main component
-export default function Home() {
-    const [screenWidth, setScreenWidth] = useState(0);
-    const [screenHeight, setScreenHeight] = useState(0);
-    const [isPortrait, setIsPortrait] = useState(false);
-
-    useEffect(() => {
-        if (screenWidth < screenHeight) {
-            setIsPortrait(true);
-        } else {
-            setIsPortrait(false);
-        }
-    }, [screenWidth, screenHeight]);
-
-    useEffect(() => {
-        // Update screen width and height
-
-        function handleResize() {
-            setScreenWidth(window.innerWidth);
-            setScreenHeight(window.innerHeight);
-        }
-
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    });
-
+export default function Home({
+    isPortrait,
+    width,
+    height,
+}: {
+    isPortrait: boolean;
+    width?: number;
+    height?: number;
+}) {
     // Define styles
 
     const TitleBox = styled.div`
         display: flex;
         flex-direction: column;
-        height: 100vh;
         ${isPortrait
             ? "transform: translateY(100px)"
             : "justify-content: center"};
         margin-left: ${isPortrait ? "20px" : "8vw"};
-        width: 100vw;
+        padding-top: ${isPortrait ? "0" : "20vh"};
     `;
 
     const MainTitle = styled.h1`
@@ -83,10 +61,10 @@ export default function Home() {
         position: absolute;
         display: flex;
         flex-direction: column;
-        left: ${isPortrait ? "30%" : "60%"};
+        left: ${isPortrait ? "20px" : "60%"};
         top: ${isPortrait ? "40%" : "35%"};
-        width: 100vw;
-        transform: rotate(10deg);
+        transform: ${isPortrait ? "none" : "rotate(10deg)"};
+        width: fit-content;
     `;
     const FloatingImage = styled.img`
         width: ${isPortrait ? "60%" : "20%"};
@@ -95,6 +73,9 @@ export default function Home() {
 
     const WIPBox = styled.div`
         color: ${isPortrait ? "#0f0f0f" : "#fbfbfb"};
+        * {
+            width: fit-content;
+        }
     `;
 
     const WIPTitle = styled.h1`
@@ -105,7 +86,7 @@ export default function Home() {
         font-size: ${isPortrait ? "2vh" : "0.8vw"};
     `;
 
-    const Main = LayoutBackground();
+    const Main = LayoutBackground({ isPortrait, width, height });
 
     return (
         <Main>
@@ -133,7 +114,7 @@ export default function Home() {
                 </FloatingBox>
             </div>
 
-            <Footer />
+            <Footer isPortrait={isPortrait} />
         </Main>
     );
 }

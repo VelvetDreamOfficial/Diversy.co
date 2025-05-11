@@ -14,16 +14,16 @@ const markoOne = Marko_One({
 });
 
 // Main component
-export default function Query() {
+export default function Query({ isPortrait }: { isPortrait: boolean }) {
     const router = useRouter();
     const query = router.query.query as string;
 
     const TitleText = styled.h1`
         font-family: ${markoOne.style.fontFamily};
         font-size: 5rem;
-        text-align: center;
+        text-align: left;
         color: #fbfbfb;
-        margin-top: 100px;
+        padding-top: 60px;
     `;
 
     const Main = LayoutBackground();
@@ -33,7 +33,7 @@ export default function Query() {
             <Navbar />
             <TitleText>{query}</TitleText>
 
-            <Footer />
+            <Footer isPortrait={isPortrait} />
         </Main>
     );
 }

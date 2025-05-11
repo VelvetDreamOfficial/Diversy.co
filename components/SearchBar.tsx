@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Search = styled.input`
-    width: 100%;
-    height: 50px;
+    width: 90%;
+    height: 40px;
     border-radius: 10px;
     border: none;
     padding-left: 20px;
     padding-right: 20px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #fbfbfb;
     background-color: #0f0f0f;
 `;
@@ -33,9 +33,17 @@ export default function SearchBar(props: { isPortrait: boolean }) {
         border: none;
         padding-left: 20px;
         padding-right: 20px;
+        width: 21vw;
+        right: 6.5vw;
         font-size: 1.5rem;
         color: #fbfbfb;
         background-color: #0f0f0f;
+
+        a {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
     `;
 
     const [isHovered, setIsHovered] = useState(false);
