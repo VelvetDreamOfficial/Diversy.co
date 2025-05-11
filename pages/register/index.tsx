@@ -3,7 +3,6 @@ import { Markazi_Text, Marko_One } from "next/font/google";
 import { up, ResponseError } from "up-fetch";
 import { useState } from "react";
 import { getUser } from "../../utils/User";
-import { redirect } from "next/navigation";
 const upfetch = up(fetch);
 
 // Define fonts

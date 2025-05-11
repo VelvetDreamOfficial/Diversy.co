@@ -2,7 +2,6 @@
 
 import styled from "styled-components";
 import "./global.css";
-import LayoutBackground from "../components/LayoutBackground";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
