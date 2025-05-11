@@ -4,7 +4,6 @@ import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { Marko_One, Markazi_Text, Aldrich } from "next/font/google";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
 import LayoutBackground from "../components/LayoutBackground";
 
 // Define fonts
