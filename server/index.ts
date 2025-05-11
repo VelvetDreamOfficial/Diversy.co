@@ -10,6 +10,8 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({
     dev,
     turbopack: true,
+    port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+    conf: { output: "export" },
 });
 const handle = nextApp.getRequestHandler();
 
