@@ -20,6 +20,7 @@
 # production
 /build
 /out
+*.sqlite
 
 # misc
 .DS_Store

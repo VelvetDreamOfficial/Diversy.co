@@ -1,11 +1,9 @@
-"use client";
-
 import styled from "styled-components";
 import { Markazi_Text, Marko_One } from "next/font/google";
 import { up, ResponseError } from "up-fetch";
 import { useState } from "react";
 import { getUser } from "../../utils/User";
-
+import { redirect } from "next/navigation";
 const upfetch = up(fetch);
 
 // Define fonts
@@ -19,7 +17,7 @@ const markaziText = Markazi_Text({
     subsets: ["latin"],
 });
 
-export default function Login({ isPortrait }: { isPortrait: boolean }) {
+export default function Register({ isPortrait }: { isPortrait: boolean }) {
     getUser(async (user) => {
         if (user) document.location.href = "/";
     });
@@ -93,15 +91,24 @@ export default function Login({ isPortrait }: { isPortrait: boolean }) {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
-        const username = form.elements[0] as HTMLInputElement;
-        const password = form.elements[1] as HTMLInputElement;
+
+        const email = form.elements[0] as HTMLInputElement;
+        const username = form.elements[1] as HTMLInputElement;
+        const password = form.elements[2] as HTMLInputElement;
+        const confirmPassword = form.elements[3] as HTMLInputElement;
+
+        if (password.value !== confirmPassword.value) {
+            setError("Passwords do not match");
+            return;
+        }
 
         try {
-            const result = await upfetch("/api/auth/login", {
+            const result = await upfetch("/api/auth/register", {
                 method: "POST",
                 body: {
                     username: username.value,
                     password: password.value,
+                    email: email.value,
                 },
             });
 
@@ -114,11 +121,13 @@ export default function Login({ isPortrait }: { isPortrait: boolean }) {
 
     return (
         <main>
-            <TitleText>Login</TitleText>
+            <TitleText>Register</TitleText>
             <FormBox onSubmit={handleSubmit}>
+                <input placeholder="Email" type="email" autoComplete="off" />
                 <input placeholder="Username" type="text" autoComplete="off" />
                 <input placeholder="Password" type="password" />
-                <button type="submit">Sign In</button>
+                <input type="password" placeholder="Confirm Password" />
+                <button type="submit">Register</button>
                 {error && <ErrorText>{error}</ErrorText>}
             </FormBox>
         </main>

@@ -1,5 +1,3 @@
-"use client";
-
 import styled from "styled-components";
 import { Marko_One, Markazi_Text, Aldrich } from "next/font/google";
 

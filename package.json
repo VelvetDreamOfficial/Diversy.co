@@ -3,11 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev --turbopack",
+        "dev": "bun run ./server/index.ts --turbopack",
         "build": "next build",
-        "start": "next start",
-        "lint": "next lint",
-        "server": "bun run --watch ./server/index.ts"
+        "start": "NODE_ENV=production bun run ./server/index.ts --turbopack",
+        "lint": "next lint"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -16,22 +15,32 @@
         "@fortawesome/free-solid-svg-icons": "^6.7.2",
         "@fortawesome/react-fontawesome": "^0.2.2",
         "@types/express": "^5.0.1",
+        "bcrypt": "^5.1.1",
+        "cookie-parser": "^1.4.7",
+        "dotenv": "^16.5.0",
         "express": "^5.1.0",
         "next": "15.3.2",
+        "next-client-cookies": "^2.1.0",
         "react": "^19.0.0",
+        "react-cookie": "^8.0.1",
         "react-dom": "^19.0.0",
+        "sequelize": "^6.37.7",
+        "sqlite3": "^5.1.7",
         "styled-components": "^6.1.18",
         "up-fetch": "^2.1.2"
     },
     "devDependencies": {
-        "typescript": "^5",
+        "@eslint/eslintrc": "^3",
+        "@tailwindcss/postcss": "^4",
+        "@types/bcrypt": "^5.0.2",
+        "@types/bun": "^1.2.13",
+        "@types/cookie-parser": "^1.4.8",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
-        "@tailwindcss/postcss": "^4",
-        "tailwindcss": "^4",
         "eslint": "^9",
         "eslint-config-next": "15.3.2",
-        "@eslint/eslintrc": "^3"
+        "tailwindcss": "^4",
+        "typescript": "^5"
     }
 }

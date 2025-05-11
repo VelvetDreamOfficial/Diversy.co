@@ -1,17 +1,27 @@
 import express from "express";
 import http from "http";
 import router from "./api";
+import next from "next";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const server = http.createServer(app);
+const dev = process.env.NODE_ENV !== "production";
+const nextApp = next({
+    dev,
+    turbopack: true,
+});
+const handle = nextApp.getRequestHandler();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-const static_files = express.static("out");
-
-app.use("/", static_files);
 app.use("/api", router);
+
+nextApp.prepare().then(() => {
+    app.use("/", (req, res) => handle(req, res));
+});
 
 server.listen(process.env.PORT || 3000, () =>
     console.log("Listening on port 3000")

@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Diversy - The world through diversity
 
-## Getting Started
+[![Diversy](https://i.imgur.com/Dm9RSIw.png)](https://diversy.co);
 
-First, run the development server:
+## A web-based platform for social and documentary exploration
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live demo: [diversy.co](https://diversy.co)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   Forum creation
+-   Create wikis
+-   Creating personalized profile pages
+-   Use wiki categories (e.g. anime.diversy.co)
+-   Creation / use of universal tags
+-   Create public and private discussions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Premium features
 
-## Learn More
+-   Advanced profile customization.
+-   Analysis tools and statistics.
+-   Unlimited storage for media and documents
+-   Priority access to new features
+-   Dedicated 24/7 technical support
 
-To learn more about Next.js, take a look at the following resources:
+## Monetization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   Ads
+-   Premium features
+-   Featured pages on the homepage

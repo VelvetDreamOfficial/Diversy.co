@@ -1,5 +1,3 @@
-"use client";
-
 import styled from "styled-components";
 import { Marko_One } from "next/font/google";
 import { useRouter } from "next/router";
