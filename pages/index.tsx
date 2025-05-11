@@ -1,0 +1,139 @@
+"use client";
+
+import Navbar from "../components/Navbar";
+import styled from "styled-components";
+import { Marko_One, Markazi_Text, Aldrich } from "next/font/google";
+import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import LayoutBackground from "../components/LayoutBackground";
+
+// Define fonts
+const markoOne = Marko_One({
+    weight: "400",
+    subsets: ["latin"],
+});
+
+const markaziText = Markazi_Text({
+    weight: "400",
+    subsets: ["latin"],
+});
+const aldrich = Aldrich({
+    weight: "400",
+    subsets: ["latin"],
+});
+
+// Main component
+export default function Home() {
+    const [screenWidth, setScreenWidth] = useState(0);
+    const [screenHeight, setScreenHeight] = useState(0);
+    const [isPortrait, setIsPortrait] = useState(false);
+
+    useEffect(() => {
+        if (screenWidth < screenHeight) {
+            setIsPortrait(true);
+        } else {
+            setIsPortrait(false);
+        }
+    }, [screenWidth, screenHeight]);
+
+    useEffect(() => {
+        // Update screen width and height
+
+        function handleResize() {
+            setScreenWidth(window.innerWidth);
+            setScreenHeight(window.innerHeight);
+        }
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    });
+
+    // Define styles
+
+    const TitleBox = styled.div`
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        ${isPortrait
+            ? "transform: translateY(100px)"
+            : "justify-content: center"};
+        margin-left: ${isPortrait ? "20px" : "8vw"};
+        width: 100vw;
+    `;
+
+    const MainTitle = styled.h1`
+        color: #fbfbfb;
+        font-size: ${isPortrait ? "11vh" : "8vw"};
+    `;
+
+    const Subtitle = styled.h2`
+        color: #fbfbfb;
+        font-size: ${isPortrait ? "3.8vh" : "2.5vw"};
+        transform: ${isPortrait
+            ? "translate(5px, -20px)"
+            : "translate(10px, -40px)"};
+    `;
+
+    const FloatingBox = styled.div`
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        left: ${isPortrait ? "30%" : "60%"};
+        top: ${isPortrait ? "40%" : "35%"};
+        width: 100vw;
+        transform: rotate(10deg);
+    `;
+    const FloatingImage = styled.img`
+        width: ${isPortrait ? "60%" : "20%"};
+        -webkit-user-drag: none;
+    `;
+
+    const WIPBox = styled.div`
+        color: ${isPortrait ? "#0f0f0f" : "#fbfbfb"};
+    `;
+
+    const WIPTitle = styled.h1`
+        font-size: ${isPortrait ? "3vh" : "3vw"};
+    `;
+
+    const WIPSubTitle = styled.h2`
+        font-size: ${isPortrait ? "2vh" : "0.8vw"};
+    `;
+
+    const Main = LayoutBackground();
+
+    return (
+        <Main>
+            <Navbar />
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: isPortrait ? "column" : "row",
+                }}
+            >
+                <TitleBox>
+                    <MainTitle className={markoOne.className}>
+                        Diversy
+                    </MainTitle>
+                    <Subtitle className={markaziText.className}>
+                        The world through <u>diversity</u>
+                    </Subtitle>
+                </TitleBox>
+                <FloatingBox>
+                    <FloatingImage src="/img.png" />
+                    <WIPBox className={aldrich.className}>
+                        <WIPTitle>Page under construction</WIPTitle>
+                        <WIPSubTitle>Come back later</WIPSubTitle>
+                    </WIPBox>
+                </FloatingBox>
+            </div>
+
+            <Footer />
+        </Main>
+    );
+}

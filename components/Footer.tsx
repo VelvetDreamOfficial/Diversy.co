@@ -2,7 +2,6 @@ import { Aldrich } from "next/font/google";
 import styled from "styled-components";
 
 const StyledFooter = styled.div`
-    width: 100vw;
     position: absolute;
     bottom: 0px;
     text-align: center;
@@ -12,6 +11,7 @@ const StyledFooter = styled.div`
     align-items: center;
     justify-content: center;
     display: flex;
+    width: 100vw;
 `;
 
 const aldrich = Aldrich({
