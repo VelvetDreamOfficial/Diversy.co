@@ -5,6 +5,7 @@ import next from "next";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 import ioServer from "./io";
+import path from "path";
 
 const app = express();
 const server = http.createServer(app);
@@ -26,6 +27,7 @@ app.use(cookieParser());
 ioServer(io);
 
 app.use("/api", router);
+app.use("/avatars", express.static(__dirname + "/hosted"));
 
 nextApp.prepare().then(() => {
     app.use("/", (req, res) => handle(req, res));

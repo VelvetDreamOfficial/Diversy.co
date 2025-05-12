@@ -82,7 +82,7 @@ export default function Navbar({ isPortrait }: { isPortrait: boolean }) {
 
     return (
         <div>
-            <NavBarContainer>
+            <NavBarContainer className="navbar">
                 <Link href="/" style={{ marginBlock: "auto" }}>
                     <FontAwesomeIcon
                         icon={faHouse}
