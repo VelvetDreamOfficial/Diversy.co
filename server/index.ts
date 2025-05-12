@@ -11,7 +11,7 @@ const nextApp = next({
     dev,
     turbopack: true,
     port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
-    conf: { output: "export" },
+    conf: { output: "standalone" },
 });
 const handle = nextApp.getRequestHandler();
 
