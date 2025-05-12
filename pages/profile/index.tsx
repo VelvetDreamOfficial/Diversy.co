@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import { up } from "up-fetch";
+import { Socket } from "socket.io-client";
 
 const upfetch = up(fetch);
 
@@ -86,7 +87,7 @@ const StatusBadge = styled.span<{ isonline: string }>`
     color: white;
 `;
 
-const ProfilePage = () => {
+const ProfilePage = (props: { socket: Socket }) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
@@ -94,6 +95,16 @@ const ProfilePage = () => {
     const [avatar, setAvatar] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    props.socket.on("connected", (id: string) => {
+        if (id === user?.id)
+            setUser((prev) => (prev ? { ...prev, isOnline: true } : null));
+    });
+
+    props.socket.on("disconnected", (id: string) => {
+        if (id === user?.id)
+            setUser((prev) => (prev ? { ...prev, isOnline: false } : null));
+    });
 
     useEffect(() => {
         getUser(async (userData) => {
@@ -206,9 +217,9 @@ const ProfilePage = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             onBlur={handleUsernameBlur}
-                            onKeyPress={(e) => {
+                            onKeyDown={async (e) => {
                                 if (e.key === "Enter") {
-                                    handleUsernameBlur();
+                                    await handleUsernameBlur();
                                 }
                             }}
                         />
@@ -228,7 +239,9 @@ const ProfilePage = () => {
                 <div className="profile-details">
                     <h2>Profile Details</h2>
                     <p>Last updated: {formatDate(user.updatedAt)}</p>
-                    <p>User ID: {user.id}</p>
+                    <p>
+                        User ID: <code>{user.id}</code>
+                    </p>
                 </div>
             </ProfileCard>
         </ProfileContainer>

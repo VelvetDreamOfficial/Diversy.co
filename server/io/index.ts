@@ -10,7 +10,7 @@ export default function ioServer(io: Server) {
             if (!user) return;
 
             users.set(socket.id, token);
-            console.log(users);
+            io.sockets.emit("connected", user.get("id"));
 
             try {
                 await User.update(
@@ -35,6 +35,8 @@ export default function ioServer(io: Server) {
                         }
                     );
                 } catch {}
+
+                io.sockets.emit("disconnected", user.get("id"));
             });
         });
     });

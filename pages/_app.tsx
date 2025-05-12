@@ -6,25 +6,19 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import io, { Socket } from "socket.io-client";
 import { getUser } from "../utils/User";
-let socket: Socket | null = null;
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     const [screenWidth, setScreenWidth] = useState(0);
     const [screenHeight, setScreenHeight] = useState(0);
     const [isPortrait, setIsPortrait] = useState(false);
 
-    useEffect(() => {
-        // Initialize socket
-        const s = io();
+    const [socket, setSocket] = useState<Socket>();
 
-        getUser(async (user) => {
-            socket = s;
-            if (user) s.emit("auth", user.token);
-        }, false);
+    const s = io();
 
-        return () => {
-            s.disconnect();
-        };
+    getUser(async (user) => {
+        setSocket(s);
+        if (user) s.emit("auth", user.token);
     });
 
     useEffect(() => {
@@ -60,16 +54,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <main>
-            <Navbar isPortrait></Navbar>
-            <Main>
-                <Component
-                    {...pageProps}
-                    isPortrait={isPortrait}
-                    height={screenHeight}
-                    width={screenWidth}
-                />
-            </Main>
-            <Footer isPortrait />
+            {socket && (
+                <main>
+                    <Navbar isPortrait></Navbar>
+                    <Main>
+                        <Component
+                            {...pageProps}
+                            isPortrait={isPortrait}
+                            height={screenHeight}
+                            width={screenWidth}
+                            socket={socket}
+                        />
+                    </Main>
+                    <Footer isPortrait />
+                </main>
+            )}
         </main>
     );
 }
