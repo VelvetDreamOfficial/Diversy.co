@@ -9,10 +9,11 @@ const server = http.createServer(app);
 const dev = process.env.BUN_ENV !== "production";
 
 const nextApp = next({
-    dev: false,
-    turbopack: true,
     port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
 });
+
+// a
+
 const handle = nextApp.getRequestHandler();
 
 app.use(express.json());
