@@ -6,12 +6,12 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 const server = http.createServer(app);
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.BUN_ENV !== "production";
+
 const nextApp = next({
-    dev,
+    dev: false,
     turbopack: true,
     port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
-    conf: { output: "standalone" },
 });
 const handle = nextApp.getRequestHandler();
 
