@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { Sequelize, STRING } from "sequelize";
+import { BOOLEAN, NUMBER, Sequelize, STRING } from "sequelize";
 
 export function generateToken() {
     let token = "";
@@ -39,15 +39,13 @@ export default function UserModel(db: Sequelize) {
             primaryKey: true,
         },
         createdAt: {
-            type: STRING,
-            defaultValue: () => Date.now().toString(),
+            type: NUMBER,
         },
         updatedAt: {
-            type: STRING,
-            defaultValue: () => Date.now().toString(),
+            type: NUMBER,
         },
         isOnline: {
-            type: STRING,
+            type: BOOLEAN,
             defaultValue: () => false,
         },
         email: {

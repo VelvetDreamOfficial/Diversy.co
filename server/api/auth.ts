@@ -18,6 +18,8 @@ router.get("/me", async (req, res) => {
                     updatedAt: user.get("updatedAt"),
                     isOnline: user.get("isOnline"),
                     avatar: user.get("avatar"),
+                    token: user.get("token"),
+                    customCSS: user.get("customCSS"),
                 });
             } else {
                 res.status(400).json({ error: "Invalid token" });
@@ -59,7 +61,13 @@ router.post("/register", async (req, res) => {
             (await User.findOne({ where: { username } })) ||
             (await User.findOne({ where: { email } }));
 
-        user = await User.create({ username, email, password: hash });
+        user = await User.create({
+            username,
+            email,
+            password: hash,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+        });
         user.save();
         const u = user.get();
 

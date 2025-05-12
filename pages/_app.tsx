@@ -4,11 +4,28 @@ import type { AppProps } from "next/app";
 import LayoutBackground from "../components/LayoutBackground";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import io, { Socket } from "socket.io-client";
+import { getUser } from "../utils/User";
+let socket: Socket | null = null;
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     const [screenWidth, setScreenWidth] = useState(0);
     const [screenHeight, setScreenHeight] = useState(0);
     const [isPortrait, setIsPortrait] = useState(false);
+
+    useEffect(() => {
+        // Initialize socket
+        const s = io();
+
+        getUser(async (user) => {
+            socket = s;
+            if (user) s.emit("auth", user.token);
+        }, false);
+
+        return () => {
+            s.disconnect();
+        };
+    });
 
     useEffect(() => {
         if (screenWidth < screenHeight) {

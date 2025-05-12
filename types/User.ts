@@ -5,4 +5,6 @@ export type User = {
     updatedAt: string;
     isOnline: boolean;
     avatar: string;
+    token: string;
+    customCSS: string;
 };

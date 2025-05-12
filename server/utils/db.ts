@@ -7,6 +7,8 @@ import path from "path";
 export const db = new Sequelize({
     dialect: "sqlite",
     storage: path.join(__dirname, "database.sqlite"),
+    retry: { max: 10 },
+    logging: false,
 });
 
 export const User = UserModel(db);
