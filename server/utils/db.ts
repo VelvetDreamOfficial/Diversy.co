@@ -3,6 +3,7 @@ import WikiPageModel from "./models/WikiPage";
 import WikiModel from "./models/Wiki";
 import UserModel from "./models/User";
 import path from "path";
+import PrivateMessageModel from "./models/PrivateMessage";
 
 export const db = new Sequelize({
     dialect: "sqlite",
@@ -14,6 +15,7 @@ export const db = new Sequelize({
 export const User = UserModel(db);
 export const Wiki = WikiModel(db);
 export const WikiPage = WikiPageModel(db);
+export const PrivateMessage = PrivateMessageModel(db);
 
 (async () => {
     db.sync();

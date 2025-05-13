@@ -6,18 +6,21 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import io, { Socket } from "socket.io-client";
 import { getUser } from "../utils/User";
+import { User } from "../types/User";
+import FloatingChatbox from "../components/Chatbox";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     const [screenWidth, setScreenWidth] = useState(0);
     const [screenHeight, setScreenHeight] = useState(0);
     const [isPortrait, setIsPortrait] = useState(false);
-
+    const [user, setUser] = useState<User | null>(null);
     const [socket, setSocket] = useState<Socket>();
 
     const s = io();
 
     getUser(async (user) => {
         setSocket(s);
+        setUser(user);
         if (user) s.emit("auth", user.token);
     });
 
@@ -56,6 +59,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <main>
             {socket && (
                 <main>
+                    <FloatingChatbox
+                        currentUser={user!}
+                        socket={socket}
+                    ></FloatingChatbox>
                     <Navbar isPortrait></Navbar>
                     <Main>
                         <Component

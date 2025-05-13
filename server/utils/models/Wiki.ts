@@ -19,7 +19,7 @@ export default function WikiModel(db: Sequelize) {
         banner: {
             type: STRING,
         },
-        ownerId: {
+        authorId: {
             type: STRING,
         },
         id: {
